@@ -1,0 +1,48 @@
+configurations:
+
+proportional:
+  name: 'Tamanho da Área (ha)'
+  code: 'prop-tamanho-area-ha'
+  signal: 'ha'
+  type: 'float'
+  formatter: 'decimal'
+
+inputs:
+  -
+    name: 'Custo Fixo Total'
+    code: 'input-custo-fixo-total'
+    type: 'float'
+    formatter: 'money'
+  -
+    name: 'Qdade. de Trabalhos Totais'
+    code: 'input-qdade-trabalhos-totais'
+    type: 'float'
+    formatter: 'decimal'
+  -
+    name: 'Participação Atuante'
+    code: 'input-participacao-atuante'
+    type: 'float'
+    formatter: 'percent'
+
+keys:
+  -
+    name: 'Custo Referencial por Trabalho (global)'
+    code: 'key-custo-refencial-trabalho'
+    operation: 'division'
+    param1: 'input-custo-fixo-total'
+    param2: 'input-qdade-trabalhos-totais'
+    formatter: 'money'
+  -
+    name: 'Custo Referencial do Serviço'
+    code: 'key-custo-refencial-servico'
+    operation: 'multiplication'
+    param1: 'key-custo-refencial-trabalho'
+    param2: 'input-participacao-atuante'
+    formatter: 'money'
+  -
+    name: 'Custo Total'
+    code: 'key-custo-total'
+    operation: 'multiplication'
+    param1: 'key-custo-refencial-servico'
+    param2: 'prop-tamanho-area-ha'
+    formatter: 'money'

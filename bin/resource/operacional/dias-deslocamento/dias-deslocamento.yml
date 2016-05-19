@@ -1,0 +1,48 @@
+configurations:
+  -
+    name: 'Velocidade Padao de Deslocamento (Km/h)'
+    code: 'config-velocidade-padrao-deslocamento'
+    type: 'float'
+    value: 60.00
+    formatter: 'decimal'
+  -
+    name: 'Número de Trajetos'
+    code: 'config-trajetos'
+    type: 'integer'
+    value: 2
+    formatter: null
+
+inputs:
+  -
+    name: 'Distância de Deslocamento'
+    code: 'input-distancia'
+    type: 'float'
+    formatter: 'decimal'
+  -
+    name: 'Horas Trabalhadas Dia'
+    code: 'input-horas-trabalhadas-dia'
+    type: 'float'
+    formatter: 'decimal'
+
+keys:
+  -
+    name: 'Distancia Ida e Volta'
+    code: 'key-distancia-ida-volta'
+    operation: 'multiplication'
+    param1: 'input-distancia'
+    param2: 'config-trajetos'
+    formatter: 'decimal'
+  -
+    name: 'Tempo de Deslocamento (horas)'
+    code: 'key-tempo-deslocamento-horas'
+    operation: 'division'
+    param1: 'key-distancia-ida-volta'
+    param2: 'config-velocidade-padrao-deslocamento'
+    formatter: 'decimal'
+  -
+    name: 'Dias de Deslocamento'
+    code: 'key-dias-deslocamento'
+    operation: 'division'
+    param1: 'key-tempo-deslocamento-horas'
+    param2: 'input-horas-trabalhadas-dia'
+    formatter: 'teto'

@@ -1,0 +1,138 @@
+serviceName: 'ASTEC - CANA'
+resources:
+  -
+    type: operacional
+    alias: dias-deslocamento
+  -
+    type: operacional
+    alias: dias-trabalhados-astec
+  -
+    type: financial
+    alias: custo-fixo
+  -
+    type: financial
+    alias: confeccao-projeto-custeio-agricola
+  -
+    type: financial
+    alias: consultoria-padrao
+  -
+    type: financial
+    alias: know-how
+  -
+    type: financial
+    alias: hospedagem-alimentacao
+  -
+    type: financial
+    alias: deslocamento-limite
+
+configurations:
+  -
+    name: 'Participação Atuante'
+    code: 'config-participacao-atuante'
+    type: 'float'
+    value: 0.15
+    formatter: 'decimal'
+
+proportional:
+  name: 'Tamanho da Área (ha)'
+  code: 'prop-tamanho-area-ha'
+  signal: 'ha'
+  type: 'float'
+  formatter: 'decimal'
+
+inputs:
+  -
+    name: 'Custo Fixo Total'
+    code: 'input-custo-fixo-total'
+    type: 'float'
+    formatter: 'money'
+  -
+    name: 'Horas Trabalhadas Dia'
+    code: 'input-horas-trabalhadas-dia'
+    type: 'float'
+    formatter: 'decimal'
+  -
+    name: 'Qdade. de Trabalhos Realizados'
+    code: 'input-qdade-trabalhos-realizados'
+    type: 'integer'
+    formatter: 'number'
+  -
+    name: 'Distância de Deslocamento'
+    code: 'input-distancia'
+    type: 'float'
+    formatter: 'decimal'
+  -
+    name: 'Qdade. de Projetos de Custeio Agrícola'
+    code: 'input-qdade-projetos'
+    type: 'integer'
+    formatter: null
+  -
+    name: 'Preço da Consultoria (ha)'
+    code: 'input-preco-consultoria'
+    type: 'float'
+    formatter: 'money'
+  -
+    name: 'Qdade. de Trabalhadores Alocados'
+    code: 'input-qdade-trabalhadores'
+    type: 'integer'
+    formatter: null
+  -
+    name: 'Qdade. de Visitas'
+    code: 'input-num-visitas'
+    type: 'integer'
+    formatter: null
+
+transitions:
+  fromConfig:
+    -
+      from: 'config-participacao-atuante'
+      resource: 'custo-fixo'
+      to: 'input-participacao-atuante'
+
+  fromInput:
+    -
+      from: 'input-custo-fixo-total'
+      resource: 'custo-fixo'
+      to: 'input-custo-fixo-total'
+    -
+      from: 'input-qdade-trabalhos-realizados'
+      resource: 'custo-fixo'
+      to: 'input-qdade-trabalhos-totais'
+    -
+      from: 'input-distancia'
+      resource: 'dias-deslocamento'
+      to: 'input-distancia'
+    -
+      from: 'input-horas-trabalhadas-dia'
+      resource: 'dias-deslocamento'
+      to: 'input-horas-trabalhadas-dia'
+    -
+      from: 'input-num-visitas'
+      resource: 'deslocamento-limite'
+      to: 'input-num-visitas'
+    -
+      from: 'input-distancia'
+      resource: 'deslocamento-limite'
+      to: 'input-distancia'
+    -
+      from: 'input-qdade-projetos'
+      resource: 'confeccao-projeto-custeio-agricola'
+      to: 'input-qdade-projetos'
+    -
+      from: 'input-preco-consultoria'
+      resource: 'consultoria-padrao'
+      to: 'input-preco'
+    -
+      from: 'input-qdade-trabalhadores'
+      resource: 'hospedagem-alimentacao'
+      to: 'input-qdade-trabalhadores'
+
+  fromResource:
+    -
+      from: 'dias-deslocamento'
+      resource: 'dias-trabalhados-astec'
+      to: 'input-dias-deslocamento'
+    -
+      from: 'dias-trabalhados-astec'
+      resource: 'hospedagem-alimentacao'
+      to: 'input-dias-trabalhados'

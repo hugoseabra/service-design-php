@@ -1,0 +1,46 @@
+serviceName: ''
+resources:
+  -
+    type: ''
+    alias: ''
+
+configurations:
+  -
+    name: ''
+    code: 'config-'
+    type: ''
+    value: ''
+    formatter: ''
+
+proportional:
+  name: ''
+  code: 'prop-'
+  signal: ''
+  type: ''
+  formatter: ''
+
+inputs:
+  -
+    name: ''
+    code: ''
+    type: ''
+    formatter: ''
+
+transitions:
+  fromConfig:
+    -
+      from: ''
+      resource: ''
+      to: ''
+
+  fromInput:
+    -
+      from: ''
+      resource: ''
+      to: ''
+
+  fromResource:
+    -
+      from: ''
+      resource: ''
+      to: ''

@@ -1,0 +1,23 @@
+configurations:
+  -
+    name: 'Dias de Trabalhados em Assistência Técnica'
+    code: 'config-dias-trabalhados-astec'
+    type: 'integer'
+    value: 1
+    formatter: null
+
+inputs:
+  -
+    name: 'Dias de Deslocamento'
+    code: 'input-dias-deslocamento'
+    type: 'float'
+    formatter: 'teto'
+
+keys:
+  -
+    name: 'Dias Trabalhados'
+    code: 'key-dias-trabalhados'
+    operation: 'adition'
+    param1: 'config-dias-trabalhados-astec'
+    param2: 'input-dias-deslocamento'
+    formatter: 'teto'

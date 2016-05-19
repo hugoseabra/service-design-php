@@ -1,0 +1,22 @@
+configurations:
+
+inputs:
+  -
+    name: 'Dias Trabalhados'
+    code: 'input-dias-trabalhados'
+    type: 'float'
+    formatter: 'teto'
+  -
+    name: 'Dias de Deslocamento'
+    code: 'input-dias-deslocamento'
+    type: 'float'
+    formatter: 'teto'
+
+keys:
+  -
+    name: 'Dias Trabalhados'
+    code: 'key-dias-trabalhados'
+    operation: 'adition'
+    param1: 'input-dias-trabalhados'
+    param2: 'input-dias-deslocamento'
+    formatter: 'teto'

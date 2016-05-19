@@ -1,0 +1,22 @@
+configurations:
+
+inputs:
+  -
+    name: 'Horas Trabalhadas Dia'
+    code: 'input-horas-trabalhadas-dia'
+    type: 'float'
+    formatter: 'decimal'
+  -
+    name: 'Dias Trabalhados'
+    code: 'input-dias-trabalhados'
+    type: integer
+    formatter: null
+
+keys:
+  -
+    name: 'Total de Horas'
+    code: 'key-total-horas'
+    operation: 'multiplication'
+    param1: 'input-horas-trabalhadas-dia'
+    param2: 'input-dias-trabalhados'
+    formatter: 'decimal'

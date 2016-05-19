@@ -1,0 +1,24 @@
+configurations:
+
+proportional:
+  name: 'Tamanho da Área (ha)'
+  code: 'prop-tamanho-area-ha'
+  signal: 'ha'
+  type: 'float'
+  formatter: 'decimal'
+
+inputs:
+  -
+    name: 'Custo Por ha'
+    code: 'input-custo-ha'
+    type: 'float'
+    formatter: 'money'
+
+keys:
+  -
+    name: 'Custo Total'
+    code: 'key-custo-total'
+    operation: 'multiplication'
+    param1: 'input-custo-ha'
+    param2: 'prop-tamanho-area-ha'
+    formatter: 'money'

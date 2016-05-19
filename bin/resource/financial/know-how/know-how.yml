@@ -1,0 +1,38 @@
+configurations:
+  -
+    name: 'Custo de Assistência Técnica (ha)'
+    code: 'config-custo-astec'
+    type: 'float'
+    value: '7.30'
+    formatter: 'money'
+  -
+    name: 'Custo de Know-how (ha)'
+    code: 'config-custo-know-how'
+    type: 'float'
+    value: '3.50'
+    formatter: 'money'
+
+proportional:
+  name: 'Tamanho da Área (ha)'
+  code: 'prop-tamanho-area-ha'
+  signal: 'ha'
+  type: 'float'
+  formatter: 'decimal'
+
+inputs:
+
+keys:
+  -
+    name: 'Custo por ha'
+    code: 'key-custo'
+    operation: 'adition'
+    param1: 'config-custo-astec'
+    param2: 'config-custo-know-how'
+    formatter: 'money'
+  -
+    name: 'Custo Total'
+    code: 'key-custo-total'
+    operation: 'multiplication'
+    param1: 'key-custo'
+    param2: 'prop-tamanho-area-ha'
+    formatter: 'money'

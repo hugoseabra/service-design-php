@@ -1,0 +1,109 @@
+configurations:
+  -
+    name: 'KM Limite para Cobrança Diferenciada'
+    code: 'config-km-limite'
+    type: 'float'
+    value: '200.00'
+    formatter: 'decimal'
+  -
+    name: 'Perc. de Cobrança para KM Rodado acima do Limite'
+    code: 'config-percent-custo-acima-limite'
+    type: 'float'
+    value: '0.10'
+    formatter: 'percent'
+  -
+    name: 'Custo do KM rodado'
+    code: 'config-custo-km'
+    type: 'float'
+    value: '0.80'
+    formatter: 'money'
+  -
+    name: 'Qdade. de Trajetos por Viagem'
+    code: 'config-trajetos'
+    type: 'integer'
+    value: 2
+    formatter: null
+
+proportional:
+  name: 'Tamanho da Área (ha)'
+  code: 'prop-tamanho-area-ha'
+  signal: 'ha'
+  type: 'float'
+  formatter: 'decimal'
+
+inputs:
+  -
+    name: 'Número de Visitas'
+    code: 'input-num-visitas'
+    type: 'integer'
+    formatter: null
+  -
+    name: 'Distância'
+    code: 'input-distancia'
+    type: 'float'
+    formatter: 'decimal'
+
+keys:
+  -
+    name: 'Valor Adicional do KM Rodado Acima do Limite'
+    code: 'key-valor-adicional-km-rodado-acima-limite'
+    operation: 'multiplication'
+    param1: 'config-custo-km'
+    param2: 'config-percent-custo-acima-limite'
+    formatter: 'money'
+  -
+    name: 'Custo do KM Rodado Acima do Limite'
+    code: 'key-custo-km-rodado-acima-limite'
+    operation: 'adition'
+    param1: 'config-custo-km'
+    param2: 'key-valor-adicional-km-rodado-acima-limite'
+    formatter: 'money'
+  -
+    name: 'Distância Ida e Volta'
+    code: 'key-distancia-ida-volta'
+    operation: 'multiplication'
+    param1: 'input-distancia'
+    param2: 'config-trajetos'
+    formatter: 'decimal'
+  -
+    name: 'Km Acima do Limite 1 Trajeto'
+    code: 'key-km-acima-limite-1-trajeto'
+    operation: 'substraction'
+    param1: 'input-distancia'
+    param2: 'config-km-limite'
+    formatter: 'decimal'
+  -
+    name: 'Km Acima do Limite'
+    code: 'key-km-acima-limite'
+    operation: 'multiplication'
+    param1: 'key-km-acima-limite-1-trajeto'
+    param2: 'config-trajetos'
+    formatter: 'decimal'
+  -
+    name: 'Custo do Deslocamento'
+    code: 'key-custo-deslocamento'
+    operation: 'multiplication'
+    param1: 'key-distancia-ida-volta'
+    param2: 'config-custo-km'
+    formatter: 'money'
+  -
+    name: 'Custo do Deslocamento Acima do Limite'
+    code: 'key-custo-deslocamento-acima-limite'
+    operation: 'multiplication'
+    param1: 'key-km-acima-limite'
+    param2: 'key-custo-km-rodado-acima-limite'
+    formatter: 'money'
+  -
+    name: 'Custo 1 viagem'
+    code: 'key-custo-viagem'
+    operation: 'adition'
+    param1: 'key-custo-deslocamento'
+    param2: 'key-custo-deslocamento-acima-limite'
+    formatter: 'money'
+  -
+    name: 'Custo Total'
+    code: 'key-custo-total'
+    operation: 'multiplication'
+    param1: 'key-custo-viagem'
+    param2: 'input-num-visitas'
+    formatter: 'money'

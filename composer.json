@@ -1,0 +1,17 @@
+{
+  "name": "servicedesign/resoucres",
+  "description": "Recursos de Serviços",
+  "license": "proprietary",
+  "require": {
+    "symfony/yaml": "3.0.*",
+    "symfony/console": "3.0.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "": "src/"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
+}

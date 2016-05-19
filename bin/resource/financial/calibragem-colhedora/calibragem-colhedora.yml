@@ -1,0 +1,30 @@
+configurations:
+  -
+    name: 'Custo do Serviço de Calibragem'
+    code: 'config-custo-calibragem'
+    type: 'float'
+    value: '1200.00'
+    formatter: 'money'
+
+proportional:
+  name: 'Tamanho da Área (ha)'
+  code: 'prop-tamanho-area-ha'
+  signal: 'ha'
+  type: 'float'
+  formatter: 'decimal'
+
+inputs:
+  -
+    name: 'Qdade. de Colhadoras'
+    code: 'input-qdade-colhedoras'
+    type: 'integer'
+    formatter: null
+
+keys:
+  -
+    name: 'Custo Total'
+    code: 'key-custo-total'
+    operation: 'multiplication'
+    param1: 'input-qdade-colhedoras'
+    param2: 'config-custo-calibragem'
+    formatter: 'money'

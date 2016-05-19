@@ -1,0 +1,30 @@
+configurations:
+  -
+    name: ''
+    code: 'config-'
+    type: ''
+    value: ''
+    formatter: 'decimal'
+
+proportional:
+  name: ''
+  code: 'prop-'
+  signal: ''
+  type: ''
+  formatter: ''
+
+inputs:
+  -
+    name: ''
+    code: 'input-'
+    type: ''
+    formatter: ''
+
+keys:
+  -
+    name: ''
+    code: 'key-'
+    operation: ''
+    param1: ''
+    param2: ''
+    formatter: ''

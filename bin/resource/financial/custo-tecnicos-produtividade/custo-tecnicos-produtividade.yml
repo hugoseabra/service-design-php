@@ -1,0 +1,72 @@
+configurations:
+
+proportional:
+  name: 'Tamanho da Área (ha)'
+  code: 'prop-tamanho-area-ha'
+  signal: 'ha'
+  type: 'float'
+  formatter: 'decimal'
+
+inputs:
+  -
+    name: 'Qdade. de Vistitas'
+    code: 'input-num-visitas'
+    type: 'integer'
+    formatter: null
+  -
+    name: 'Horas do Técnico (dia)'
+    code: 'input-horas-tecnico'
+    type: 'float'
+    formatter: 'decimal'
+  -
+    name: 'Horas do Técnico Sênior (dia)'
+    code: 'input-horas-tecnico-senior'
+    type: 'float'
+    formatter: 'decimal'
+  -
+    name: 'Custo Técnico (hora)'
+    code: 'input-custo-tecnico-hora'
+    type: 'float'
+    formatter: 'money'
+  -
+    name: 'Custo Técnico Sênior (hora)'
+    code: 'input-custo-tecnico-senior-hora'
+    type: 'float'
+    formatter: 'money'
+
+keys:
+  -
+    name: 'Horas de Trabalho do Técnico (consultoria)'
+    code: 'key-horas-tecnico'
+    operation: 'multiplication'
+    param1: 'input-num-visitas'
+    param2: 'input-horas-tecnico'
+    formatter: 'teto'
+  -
+    name: 'Horas de Trabalho do Técnico Sênior (consultoria)'
+    code: 'key-horas-tecnico-senior'
+    operation: 'division'
+    param1: 'input-num-visitas'
+    param2: 'input-horas-tecnico-senior'
+    formatter: 'teto'
+  -
+    name: 'Custo do Técnico (hora)'
+    code: 'key-custo-tecnico'
+    operation: 'multiplication'
+    param1: 'key-horas-tecnico'
+    param2: 'input-custo-tecnico-hora'
+    formatter: 'money'
+  -
+    name: 'Custo do Técnico Sênior (hora)'
+    code: 'key-custo-tecnico-senior'
+    operation: 'multiplication'
+    param1: 'key-horas-tecnico'
+    param2: 'input-custo-tecnico-senior-hora'
+    formatter: 'money'
+  -
+    name: 'Custo Total'
+    code: 'key-custo-total'
+    operation: 'adition'
+    param1: 'key-custo-tecnico'
+    param2: 'key-custo-tecnico-senior'
+    formatter: 'money'

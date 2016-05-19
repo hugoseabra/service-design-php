@@ -1,0 +1,136 @@
+configurations:
+  -
+    name: 'Custo Médio de Hotel (pessoa/dia)'
+    code: 'config-custo-hotel'
+    type: 'float'
+    value: '80.00'
+    formatter: 'money'
+  -
+    name: 'Custo Médio de Lanche (pessoa/dia)'
+    code: 'config-custo-lanche'
+    type: 'float'
+    value: '7.50'
+    formatter: 'money'
+  -
+    name: 'Custo de Almoço (pessoa/dia)'
+    code: 'config-custo-almoco'
+    type: 'float'
+    value: '20.00'
+    formatter: 'money'
+  -
+    name: 'Custo de Jantar (pessoa/dia)'
+    code: 'config-custo-jantar'
+    type: 'float'
+    value: '20.00'
+    formatter: 'money'
+  -
+    name: 'Referência de Cálculo para Hospedagem'
+    code: 'config-ref-hospedagem'
+    type: 'integer'
+    value: 1
+    formatter: null
+
+proportional:
+  name: 'Tamanho da Área (ha)'
+  code: 'prop-tamanho-area-ha'
+  signal: 'ha'
+  type: 'float'
+  formatter: 'decimal'
+
+inputs:
+  -
+    name: 'Dias Trabalhados (deslocamento + in-loco)'
+    code: 'input-dias-trabalhados'
+    type: 'integer'
+    formatter: null
+  -
+    name: 'Qdade. de Trabalhadores Alocados'
+    code: 'input-qdade-trabalhadores'
+    type: 'integer'
+    formatter: null
+
+keys:
+  -
+    name: 'Qdade. Hospedagens Prevista'
+    code: 'key-qdade-hospedagens'
+    operation: 'substraction'
+    param1: 'input-dias-trabalhados'
+    param2: 'config-ref-hospedagem'
+    formatter: null
+  -
+    name: 'Custo de Hospedagem (pessoa/dia)'
+    code: 'key-custo-hospedagem-pessoa-dia'
+    operation: 'multiplication'
+    param1: 'key-qdade-hospedagens'
+    param2: 'config-custo-hotel'
+    formatter: 'money'
+  -
+    name: 'Custo Total de Hospedagem'
+    code: 'key-custo-total-hospedagem'
+    operation: 'multiplication'
+    param1: 'key-custo-hospedagem-pessoa-dia'
+    param2: 'input-qdade-trabalhadores'
+    formatter: 'money'
+  -
+    name: 'Custo de Lanche (pessoa/dia)'
+    code: 'key-custo-lanche-pessoa-dia'
+    operation: 'multiplication'
+    param1: 'input-dias-trabalhados'
+    param2: 'config-custo-lanche'
+    formatter: 'money'
+  -
+    name: 'Custo Total de Lanche'
+    code: 'key-custo-total-lanche'
+    operation: 'multiplication'
+    param1: 'key-custo-lanche-pessoa-dia'
+    param2: 'input-qdade-trabalhadores'
+    formatter: 'money'
+  -
+    name: 'Custo de Almoço (pessoa/dia)'
+    code: 'key-custo-almoco-pessoa-dia'
+    operation: 'multiplication'
+    param1: 'input-dias-trabalhados'
+    param2: 'config-custo-almoco'
+    formatter: 'money'
+  -
+    name: 'Custo Total de Almoco'
+    code: 'key-custo-total-almoco'
+    operation: 'multiplication'
+    param1: 'key-custo-almoco-pessoa-dia'
+    param2: 'input-qdade-trabalhadores'
+    formatter: 'money'
+  -
+    name: 'Custo de Jantar (pessoa/dia)'
+    code: 'key-custo-jantar-pessoa-dia'
+    operation: 'multiplication'
+    param1: 'input-dias-trabalhados'
+    param2: 'config-custo-jantar'
+    formatter: 'money'
+  -
+    name: 'Custo Total de Jantar'
+    code: 'key-custo-total-jantar'
+    operation: 'multiplication'
+    param1: 'key-custo-jantar-pessoa-dia'
+    param2: 'input-qdade-trabalhadores'
+    formatter: 'money'
+  -
+    name: 'Custo Total de Refeição'
+    code: 'key-custo-refeicao'
+    operation: 'adition'
+    param1: 'key-custo-total-almoco'
+    param2: 'key-custo-total-jantar'
+    formatter: 'money'
+  -
+    name: 'Custo Total de Alimentação'
+    code: 'key-custo-alimentacao'
+    operation: 'adition'
+    param1: 'key-custo-refeicao'
+    param2: 'key-custo-total-lanche'
+    formatter: 'money'
+  -
+    name: 'Custo Total'
+    code: 'key-custo-total'
+    operation: 'adition'
+    param1: 'key-custo-alimentacao'
+    param2: 'key-custo-total-hospedagem'
+    formatter: 'money'
